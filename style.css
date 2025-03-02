@@ -23,6 +23,16 @@ body {
     height: 100vh;
 }
 
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
 nav {
     position: fixed;
     bottom: 0;

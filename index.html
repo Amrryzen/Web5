@@ -11,30 +11,40 @@
 <body>
     <div class="container">
         <nav>
-            <a href="/">HOME</a>
-            <a onclick="darkMode()">MODE</a>
+            <a onclick="reRender()" id="home">Home</a>
+            <a onclick="darkMode()" id="mode">Mode</a>
         </nav>
         <h1>Web 5</h1>
+        <p class="info" id="info"></p>
     </div>
 
     <!-- initializing function script -->
     <script>
         let body = document.body;
+        let info = document.getElementById("info")
+        let mode = document.getElementById("mode")
+        let home = document.getElementById("home")
 
         const darkLimit = 5;
         let darkCounter = 0;
-        
+        let darkRemainingLeft;
 
-        function darkMode(){
-            if(darkCounter == darkLimit){
-                console.log("Dark Mode is Ended")
+        function darkMode() {
+            if (darkRemainingLeft == 1) {
+                info.textContent = "Limit Darkmode is Over"
+                mode.style.display = "none";
+                home.textContent = "Restart";
                 return;
             }
             darkCounter += 1;
-            let darkRemainingLeft = darkLimit - darkCounter;
-            console.log("darkMode on clicked", darkCounter);
-            console.log("Your Limit is :", darkRemainingLeft);
+            darkRemainingLeft = darkLimit - darkCounter;
+            //render ke info element
+            info.textContent = `Darkmode used ${darkCounter}x, remaining ${darkRemainingLeft} time`
             body.classList.toggle("dark");
+        }
+
+        function reRender(){
+        location.reload();
         }
     </script>
 </body>
