@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">HOME</a>
+            <a onclick="darkMode()">MODE</a>
+        </nav>
+        <h1>Web 5</h1>
+    </div>
+
+    <!-- initializing function script -->
+    <script>
+        let body = document.body;
+
+        const darkLimit = 5;
+        let darkCounter = 0;
+        
+
+        function darkMode(){
+            if(darkCounter == darkLimit){
+                console.log("Dark Mode is Ended")
+                return;
+            }
+            darkCounter += 1;
+            let darkRemainingLeft = darkLimit - darkCounter;
+            console.log("darkMode on clicked", darkCounter);
+            console.log("Your Limit is :", darkRemainingLeft);
+            body.classList.toggle("dark");
+        }
+    </script>
+</body>
+
+</html>
