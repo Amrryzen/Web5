@@ -2,51 +2,100 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet" />
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="style.css" rel="stylesheet" />
+  <title>Document</title>
 </head>
 
 <body>
-    <div class="container">
-        <nav>
-            <a onclick="reRender()" id="home">Home</a>
-            <a onclick="darkMode()" id="mode">Mode</a>
-        </nav>
-        <h1>Web 5</h1>
-        <p class="info" id="info"></p>
-    </div>
+  <div class="container">
+    <nav>
+      <a onclick="reRender()" id="home">Home</a>
+      <a onclick="darkMode()" id="mode">Mode: Light</a>
+      <a onclick="jombloMode()" id="jomblo">Mode Jomblo: ON</a>
+    </nav>
+    <h1>Web 5</h1>
+    <p class="info" id="info"></p>
+  </div>
 
-    <!-- initializing function script -->
-    <script>
-        let body = document.body;
-        let info = document.getElementById("info")
-        let mode = document.getElementById("mode")
-        let home = document.getElementById("home")
+  <script>
+    let body = document.body;
+    let info = document.getElementById("info");
+    let mode = document.getElementById("mode");
+    let jomblo = document.getElementById("jomblo");
+    let home = document.getElementById("home");
 
-        const darkLimit = 5;
-        let darkCounter = 0;
-        let darkRemainingLeft;
+    const darkLimit = 5;
+    let darkCounter = 0;
+    let darkRemainingLeft = darkLimit;
 
-        function darkMode() {
-            if (darkRemainingLeft == 1) {
-                info.textContent = "Limit Darkmode is Over"
-                mode.style.display = "none";
-                home.textContent = "Restart";
-                return;
-            }
-            darkCounter += 1;
-            darkRemainingLeft = darkLimit - darkCounter;
-            //render ke info element
-            info.textContent = `Darkmode used ${darkCounter}x, remaining ${darkRemainingLeft} time`
-            body.classList.toggle("dark");
-        }
+    const jombloLimit = 3;
+    let jombloCounter = 0;
+    let jombloRemainingLeft = jombloLimit;
 
-        function reRender(){
-        location.reload();
-        }
-    </script>
+    function darkMode() {
+      if (darkRemainingLeft <= 0) {
+        info.textContent = "Limit Mode is Over";
+        mode.style.display = "none";
+        home.textContent = "Restart";
+        return;
+      }
+
+      body.classList.toggle("dark");
+
+      // Tambah counter hanya jika mengaktifkan dark
+      if (body.classList.contains("dark")) {
+        darkCounter++;
+        darkRemainingLeft = darkLimit - darkCounter;
+      }
+
+      // Ubah teks tombol mode
+      mode.textContent = body.classList.contains("dark") ? "Mode: Dark" : "Mode: Light";
+
+      // Update info
+      if (darkRemainingLeft <= 0) {
+        info.textContent = "Limit Mode is Over";
+        mode.style.display = "none";
+        home.textContent = "Restart";
+      } else {
+        info.textContent = `Darkmode used ${darkCounter}x, remaining ${darkRemainingLeft} time`;
+      }
+    }
+
+    function jombloMode() {
+      if (jombloRemainingLeft <= 0) {
+        info.textContent = "Selamat anda mendapat pacar😁😍";
+        jomblo.style.display = "none";
+        home.textContent = "Restart";
+        return;
+      }
+
+      body.classList.toggle("jomblo");
+
+      // Tambah counter hanya jika mengaktifkan dark
+      if (body.classList.contains("jomblo")) {
+        jombloCounter++;
+        jombloRemainingLeft = jombloLimit - jombloCounter;
+      }
+
+      // Ubah teks tombol mode
+      jomblo.textContent = body.classList.contains("jomblo") ? "Mode Jomblo: ON" : "Mode Jomblo: Off";
+
+      // Update info
+      if (jombloRemainingLeft <= 0) {
+        info.textContent = "Selamat anda mendapat pacar😁😍";
+        jomblo.style.display = "none";
+        home.textContent = "Restart";
+      } else {
+        info.textContent = `Jomblomode used ${jombloCounter}x, remaining ${jombloRemainingLeft} time`;
+      }
+    }
+
+    function reRender() {
+      window.location.reload();
+    }
+  </script>
 </body>
 
 </html>
